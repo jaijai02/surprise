@@ -1,160 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy 18th Birthday, Ariane!</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(to right, #ff7eb3, #ff758c, #ff2a68, #ff5e62);
-            font-family: Arial, sans-serif;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        #message {
-            display: none;
-            font-size: 1.5rem;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            margin-top: 20px;
-            animation: popIn 1s ease;
-            white-space: pre-wrap;
-            text-align: center;
-        }
-        .button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            color: #ff2a68;
-            background-color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 10px;
-        }
-        .button:hover {
-            background-color: #ff5e62;
-            color: white;
-        }
-        #boo {
-            font-size: 10rem;
-            color: #ff2a68;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-        }
-        @keyframes flashBoo {
-            0% { opacity: 0; transform: scale(0) translate(-50%, -50%); }
-            50% { opacity: 1; transform: scale(2) translate(-50%, -50%); }
-            100% { opacity: 0; transform: scale(0) translate(-50%, -50%); }
-        }
-        #justKidding {
-            font-size: 2rem;
-            color: white;
-            display: none;
-        }
-        @keyframes popIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .custom-alert {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            max-width: 80%;
-            font-size: 1.5rem;
-            z-index: 1000;
-        }
-        .alert-button {
-            padding: 10px 20px;
-            margin-top: 20px;
-            font-size: 1.2rem;
-            background-color: #ff2a68;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-        }
-        .alert-button:hover {
-            background-color: #ff5e62;
-        }
-    </style>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(45deg, #ff69b4, #ff1493);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    
+    .container {
+      text-align: center;
+      max-width: 600px;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    h1 {
+      color: #ff1493;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .message {
+      color: #333;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin: 2rem 0;
+      text-align: left;
+    }
+    
+    .question {
+      color: #ff1493;
+      font-size: 1.5rem;
+      margin: 2rem 0;
+      font-weight: bold;
+    }
+    
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .button {
+      padding: 1rem 3rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .yes-btn {
+      background: #ff1493;
+      color: white;
+    }
+    
+    .no-btn {
+      background: #999;
+      color: white;
+    }
+    
+    .button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    #celebration {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f0f;
+      animation: confetti 5s ease-in-out infinite;
+    }
+
+    .response-message {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      font-size: 1.5rem;
+      color: #ff1493;
+      animation: popIn 0.5s ease-out forwards;
+    }
+
+    @keyframes popIn {
+      0% { transform: translate(-50%, -50%) scale(0); }
+      50% { transform: translate(-50%, -50%) scale(1.2); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+    
+    @keyframes confetti {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-
-    <div>
-        <h1>I-click mo po yung nasa ibaba^^</h1>
-        <button class="button" onclick="showMessage()">here po</button>
-        <div id="boo">🎉</div>
-        <div id="justKidding">Surprise!</div>
-        <div id="message">
-Happy 18th Birthday!<br><br>
-
-I hope you're doing okay kahit na sobrang abala ka sa school at mga gawain sa bahay. Alam ko nakakapagod, pero kinakaya mo parin. Gusto ko lang sanang sabihin na sana mag-enjoy ka naman, lalo na sa espesyal na araw mo. You truly deserve this. Kaya eto na ang tanong ko sayo Raiko:<br><br>
-
-Can we go out?<br><br>
-<button class="button" onclick="answerYes()">Yes naman</button>
-<button class="button" onclick="answerNo()">No :<</button><br><br>
-
-Dito ko na tinanong kasi alam ko na sasabihin mo, "Ano gagawin sa labas?" o kaya "Edi lumabas ka." Kilala na kita eh, alam ko na galawan mo HAHAHAHA. Kaya sagutin mo na 'yan, dito na mismo.
-        </div>
+  <div class="container">
+    <h1>Happy 18th Birthday, Raiko! 🎉</h1>
+    
+    <div class="message">
+      I hope you're doing okay kahit na sobrang abala ka sa school at mga gawain sa bahay. Alam ko, nakakapagod, pero kaya mo 'yan. Gusto ko lang sanang sabihin na sana mag-enjoy ka naman, lalo na sa espesyal na araw mo. You truly deserve this. Kaya eto na, ang tanong ko sa'yo, Raiko:
     </div>
-
-    <div id="customAlert" class="custom-alert">
-        <p id="alertText"></p>
-        <button class="alert-button" onclick="closeAlert()">Close</button>
+    
+    <div class="question">Can we go out? 💕</div>
+    
+    <div class="buttons">
+      <button class="button yes-btn" onclick="celebrate()">Yes</button>
+      <button class="button no-btn" onclick="moveButton(this)">No</button>
     </div>
+  </div>
 
-    <script>
-        function showMessage() {
-            const boo = document.getElementById('boo');
-            boo.style.opacity = '1';
-            boo.style.animation = 'flashBoo 1s forwards';
+  <div id="celebration"></div>
+  <div id="responseMessage" class="response-message">
+    Yay! Message me for your answer 😚
+  </div>
 
-            setTimeout(function () {
-                boo.style.opacity = '0';
-                document.getElementById('justKidding').style.display = 'block';
-            }, 1000);
+  <script>
+    function moveButton(btn) {
+      const maxX = window.innerWidth - btn.offsetWidth;
+      const maxY = window.innerHeight - btn.offsetHeight;
+      
+      btn.style.position = 'fixed';
+      btn.style.left = Math.random() * maxX + 'px';
+      btn.style.top = Math.random() * maxY + 'px';
+    }
 
-            setTimeout(function () {
-                document.getElementById('justKidding').style.display = 'none';
-                document.getElementById('message').style.display = 'block';
-            }, 2000);
-        }
-
-        function answerYes() {
-            showCustomAlert("Yay! Chat mo ko sa sagot mo kasi hindi ko toh kita HAHAHAHA");
-        }
-
-        function answerNo() {
-            showCustomAlert("Sayang naman boss pero okay lang choice mo naman yan");
-        }
-
-        function showCustomAlert(message) {
-            document.getElementById('alertText').innerText = message;
-            document.getElementById('customAlert').style.display = 'block';
-        }
-
-        function closeAlert() {
-            document.getElementById('customAlert').style.display = 'none';
-        }
-    </script>
-
+    function celebrate() {
+      const celebration = document.getElementById('celebration');
+      const responseMessage = document.getElementById('responseMessage');
+      
+      celebration.style.display = 'block';
+      responseMessage.style.display = 'block';
+      
+      const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ff69b4', 'white'];
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 5 + 's';
+        celebration.appendChild(confetti);
+      }
+    }
+  </script>
 </body>
 </html>
