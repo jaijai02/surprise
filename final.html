@@ -67,6 +67,7 @@
     .no-btn {
       background: #999;
       color: white;
+      position: relative;
     }
     
     .button:hover {
@@ -132,7 +133,7 @@
     
     <div class="buttons">
       <button class="button yes-btn" onclick="celebrate()">Yes</button>
-      <button class="button no-btn" onclick="moveButton(this)">No</button>
+      <button class="button no-btn" id="noButton">No</button>
     </div>
   </div>
 
@@ -142,14 +143,47 @@
   </div>
 
   <script>
-    function moveButton(btn) {
-      const maxX = window.innerWidth - btn.offsetWidth;
-      const maxY = window.innerHeight - btn.offsetHeight;
+    const noButton = document.getElementById('noButton');
+    let isTouchDevice = 'ontouchstart' in window;
+    
+    function moveButton() {
+      const maxX = window.innerWidth - noButton.offsetWidth;
+      const maxY = window.innerHeight - noButton.offsetHeight;
       
-      btn.style.position = 'fixed';
-      btn.style.left = Math.random() * maxX + 'px';
-      btn.style.top = Math.random() * maxY + 'px';
+      // Ensure the button stays within viewport bounds
+      const newX = Math.min(Math.max(0, Math.random() * maxX), maxX);
+      const newY = Math.min(Math.max(0, Math.random() * maxY), maxY);
+      
+      noButton.style.position = 'fixed';
+      noButton.style.left = newX + 'px';
+      noButton.style.top = newY + 'px';
     }
+
+    // Add event listeners for both mouse and touch events
+    noButton.addEventListener('mouseover', moveButton);
+    noButton.addEventListener('touchstart', function(e) {
+      e.preventDefault(); // Prevent default touch behavior
+      moveButton();
+    }, { passive: false });
+
+    // Also move when getting close to the button
+    document.addEventListener('mousemove', function(e) {
+      const rect = noButton.getBoundingClientRect();
+      const buttonCenter = {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2
+      };
+      
+      const distance = Math.sqrt(
+        Math.pow(e.clientX - buttonCenter.x, 2) + 
+        Math.pow(e.clientY - buttonCenter.y, 2)
+      );
+      
+      // Move if cursor gets within 100 pixels
+      if (distance < 100) {
+        moveButton();
+      }
+    });
 
     function celebrate() {
       const celebration = document.getElementById('celebration');
