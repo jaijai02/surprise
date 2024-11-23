@@ -1,207 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(45deg, #ff69b4, #ff1493);
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
-    
-    .container {
-      text-align: center;
-      max-width: 600px;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    }
-    
-    h1 {
-      color: #ff1493;
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .message {
-      color: #333;
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin: 2rem 0;
-      text-align: left;
-    }
-    
-    .question {
-      color: #ff1493;
-      font-size: 1.5rem;
-      margin: 2rem 0;
-      font-weight: bold;
-    }
-    
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    
-    .button {
-      padding: 1rem 3rem;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    
-    .yes-btn {
-      background: #ff1493;
-      color: white;
-    }
-    
-    .no-btn {
-      background: #999;
-      color: white;
-      position: relative;
-    }
-    
-    .button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    #celebration {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-    
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: #f0f;
-      animation: confetti 5s ease-in-out infinite;
-    }
-
-    .response-message {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-      z-index: 1000;
-      font-size: 1.5rem;
-      color: #ff1493;
-      animation: popIn 0.5s ease-out forwards;
-    }
-
-    @keyframes popIn {
-      0% { transform: translate(-50%, -50%) scale(0); }
-      50% { transform: translate(-50%, -50%) scale(1.2); }
-      100% { transform: translate(-50%, -50%) scale(1); }
-    }
-    
-    @keyframes confetti {
-      0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(100vh) rotate(360deg); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Happy Birthday Raiko!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffd1dc, #ff9eaa);
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 20px;
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+        h1 {
+            color: #ff6b81;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        .decoration {
+            font-size: 2rem;
+            margin: 1rem 0;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Happy 18th Birthday, Raiko! 🎉</h1>
-    
-    <div class="message">
-      I hope you're doing okay kahit na sobrang abala ka sa school at mga gawain sa bahay. Alam ko nakakapagod pero kinakaya mo. Gusto ko lang sanang sabihin na sana mag-enjoy ka naman lalo na sa espesyal na araw mo. You truly deserve this. Kaya eto na ang tanong ko sayo Raiko:
+    <div class="card">
+        <div class="decoration">🎉 🎂 🎈</div>
+        <h1>Happy 18th Birthday, Raiko!</h1>
+        <p>Happy birthday, Raiko! Sayang hindi tayo makakalabas bukas kasi may practice kayo, tapos pupunta pa si Bessy mo. Medyo nagtatampo lang ako ngayon sa mundo, pero okay lang, naiintindihan ko naman na kailangan mong unahin yun.</p>
+        <p>So, I hope you still have fun tomorrow and enjoy your special day! Like you mentioned, pupunta na lang ako sa Tanay sa Linggo. I apologize in advance for the late gift, but I'll make sure to bring it then.</p>
+        <p>Happy birthday ulit, and I hope it's an amazing day tomorrow!</p>
+        <div class="decoration">🎁 ✨ 🎊</div>
     </div>
-    
-    <div class="question">Can we go out? 💕</div>
-    
-    <div class="buttons">
-      <button class="button yes-btn" onclick="celebrate()">Yes</button>
-      <button class="button no-btn" id="noButton">No</button>
-    </div>
-  </div>
-
-  <div id="celebration"></div>
-  <div id="responseMessage" class="response-message">
-    Yun oh! message mo po ako sa answer mo kasi diko kita sinagot mo hehe😁
-  </div>
-
-  <script>
-    const noButton = document.getElementById('noButton');
-    let isTouchDevice = 'ontouchstart' in window;
-    
-    function moveButton() {
-      const maxX = window.innerWidth - noButton.offsetWidth;
-      const maxY = window.innerHeight - noButton.offsetHeight;
-      
-      // Ensure the button stays within viewport bounds
-      const newX = Math.min(Math.max(0, Math.random() * maxX), maxX);
-      const newY = Math.min(Math.max(0, Math.random() * maxY), maxY);
-      
-      noButton.style.position = 'fixed';
-      noButton.style.left = newX + 'px';
-      noButton.style.top = newY + 'px';
-    }
-
-    // Add event listeners for both mouse and touch events
-    noButton.addEventListener('mouseover', moveButton);
-    noButton.addEventListener('touchstart', function(e) {
-      e.preventDefault(); // Prevent default touch behavior
-      moveButton();
-    }, { passive: false });
-
-    // Also move when getting close to the button
-    document.addEventListener('mousemove', function(e) {
-      const rect = noButton.getBoundingClientRect();
-      const buttonCenter = {
-        x: rect.left + rect.width / 2,
-        y: rect.top + rect.height / 2
-      };
-      
-      const distance = Math.sqrt(
-        Math.pow(e.clientX - buttonCenter.x, 2) + 
-        Math.pow(e.clientY - buttonCenter.y, 2)
-      );
-      
-      // Move if cursor gets within 100 pixels
-      if (distance < 100) {
-        moveButton();
-      }
-    });
-
-    function celebrate() {
-      const celebration = document.getElementById('celebration');
-      const responseMessage = document.getElementById('responseMessage');
-      
-      celebration.style.display = 'block';
-      responseMessage.style.display = 'block';
-      
-      const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ff69b4', 'white'];
-      for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = Math.random() * 5 + 's';
-        celebration.appendChild(confetti);
-      }
-    }
-  </script>
 </body>
 </html>
